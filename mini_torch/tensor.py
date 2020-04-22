@@ -69,7 +69,7 @@ class Tensor:
 
         prev = {self.name: self, obj.name: obj}
         name = 'sub'
-        data = np.add(self.data, obj.data)
+        data = np.subtract(self.data, obj.data)
         required_grad = len(grad_value) != 0
 
         return Tensor(name=name, shape=None, data=data,
