@@ -119,25 +119,23 @@ class Tensor:
         rep += "shape: {}\n".format(str(self.shape()))
         return rep
 
+    def backward(self):
+        if self.prev is None:
+            return
 
-def backward(self):
-    if self.prev is None:
+        for prev_name, prev_obj in self.prev.items():
+            if prev_obj.grad is not None:
+                for k, v in prev_obj.grad.items():
+                    prev_obj.grad[k] = v * self.grad[prev_name]
+                prev_obj.backward()
+            else:
+                pass
         return
 
-    for prev_name, prev_obj in self.prev.items():
-        if prev_obj.grad is not None:
-            for k, v in prev_obj.grad.items():
-                prev_obj.grad[k] = v * self.grad[prev_name]
-            prev_obj.backward()
-        else:
-            pass
-    return
+    def zero_grad(self):
+        self.grad = self.__default_grad_value
 
-
-def zero_grad(self):
-    self.grad = self.__default_grad_value
-
-    if self.prev is not None:
-        for prev_name, prev_obj in self.prev.items():
-            prev_obj.zero_grad()
-    return
+        if self.prev is not None:
+            for prev_name, prev_obj in self.prev.items():
+                prev_obj.zero_grad()
+        return
