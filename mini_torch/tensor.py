@@ -20,7 +20,13 @@ class Tensor:
 
         if required_grad:
             if grad_value is None:
-                self.grad = {self.name: 1.}
+                if data is not None:
+                    self.grad = {self.name: np.ones(data.shape)}
+                elif shape is not None:
+                    self.grad = {self.name: np.ones(shape)}
+                else:
+                    self.grad = {self.name: np.ones(1)}
+
                 self.__default_grad_value = copy.deepcopy(self.grad)
             else:
                 self.grad = grad_value
@@ -113,12 +119,6 @@ class Tensor:
     def shape(self):
         return self.data.shape
 
-    def __str__(self):
-        rep = "{}\n".format(str(type(self)))
-        rep += "{}\n".format(str(self.data))
-        rep += "shape: {}\n".format(str(self.shape()))
-        return rep
-
     def backward(self):
         if self.prev is None:
             return
@@ -139,3 +139,9 @@ class Tensor:
             for prev_name, prev_obj in self.prev.items():
                 prev_obj.zero_grad()
         return
+
+    def __str__(self):
+        rep = "{}\n".format(str(type(self)))
+        rep += "{}\n".format(str(self.data))
+        rep += "shape: {}\n".format(str(self.shape()))
+        return rep
