@@ -118,34 +118,6 @@ class Tensor:
         rep += "shape: {}\n".format(str(self.shape()))
         return rep
 
-    def backward_a(self):
-        if self.prev is None:
-            return self.grad[self.name]
-        else:
-            result = []
-            for k, v in self.prev.items():
-                if v.grad is not None:
-                    result.append(self.grad[k] * self.prev[k].backward())
-                else:
-                    pass
-            return result
-
-    def backward_b(self, d=dict()):
-        if self.prev is None:
-            d[self.name] = self.grad[self.name]
-            return d
-        else:
-
-            for name, obj in self.prev.items():
-                if obj.grad is not None:
-                    d = self.prev[name].backward_b(d)
-                    if name in d.keys():
-                        d[name] = d[name] * self.grad[name]
-
-                else:
-                    pass
-            return d
-
     # TODO write zero_grad()
     def backward(self):
         if self.prev is None:
