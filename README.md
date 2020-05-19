@@ -2,6 +2,8 @@
 This is a toy torch-like framework for educational purposes.    
 The central idea of this project is to implement autogradient mechanics and show how it works. 
 
+![](https://github.com/denistr16/miniPyTorch/blob/master/media/chain-rule.jpg)
+
 
 ## Installation
 
@@ -14,7 +16,7 @@ chmod +x install.sh
 
 ## Usage example
 
-To avoid dependency conflict we will keep dev under py virtual environment:
+To avoid dependency conflict we will keep dev under python virtual environment:
 ```sh
 source venv/bin/activate
 ```
@@ -45,7 +47,8 @@ print('grad w1', w1.grad)
 
 Denistr16 – [@github](https://github.com/denistr16)
 
-Distributed under the MIT license. See ``LICENSE`` for more information.
+Distributed under the MIT license. 
+See [``LICENSE``](https://github.com/denistr16/miniPyTorch/blob/master/LICENSE.md) for more information.
 
 [https://github.com/denistr16/miniPyTorch](https://github.com/denistr16/miniPyTorch)
 
