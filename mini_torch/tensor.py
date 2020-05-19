@@ -44,7 +44,8 @@ class Tensor:
             return cls(name=name, shape=None, data=tensor.data, required_grad=required_grad,
                        grad_value=tensor.grad, prev=tensor.prev)
         else:
-            grad_value = {tensor.name: 1.}
+            # grad_value = {tensor.name: 1.}
+            grad_value = {tensor.name: np.ones(tensor.data.shape)}
             return cls(name=name, shape=None, data=tensor.data, required_grad=required_grad,
                        grad_value=grad_value, prev={tensor.name: tensor})
 
