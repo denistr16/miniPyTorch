@@ -27,10 +27,10 @@ and compute it's gradient:
 import numpy as np
 from mini_torch.tensor import Tensor as T
 
-w1 = T.from_numpy(np.array([-0.91]).astype(float))
-w0 = T.from_numpy(np.array([1.5]).astype(float))
+w1 = T.from_numpy('w1', np.array([-0.91]).astype(float))
+w0 = T.from_numpy('w0', np.array([1.5]).astype(float))
 
-x = T.from_numpy(np.array([2.], required_grad=False).astype(float))
+x = T.from_numpy('x', np.array([2.]).astype(float), required_grad=False)
 
 y = w0 + w1*x
 
