@@ -35,11 +35,24 @@ x = T.from_numpy('x', np.array([2.]).astype(float), required_grad=False)
 y = w0 + w1*x
 
 print(y)
+```
 
+```python
+> <class 'mini_torch.tensor.Tensor'>  
+> [-0.32]   
+> shape: (1,)
+```
+
+```python
 y.backward()
 
 print('grad w0', w0.grad)
 print('grad w1', w1.grad)
+```
+
+```python
+> {'w0': array([1.])}
+> {'w1': array([2.])}
 ```
 
 
